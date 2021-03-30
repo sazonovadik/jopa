@@ -81,27 +81,23 @@ if (!$_SESSION['user']) {
                     <button type="submit" name="profile_sub">Сохранить</button>
                     <?php
                         if (isset($_POST['profile_sub'])) {
-                                if ($_POST['full_name'] != '' || $_POST['login'] != '' || $_POST['email'] != '')
-                                {
+                                if ($_POST['full_name'] != '' && $_POST['login'] != '' && $_POST['email'] != '') {
                                     $check_login = mysqli_query($link, "SELECT * FROM users WHERE login = '$login'");
-                                if (mysqli_num_rows($check_login) > 0 && $_POST['login'] != $_SESSION['user']['login'])
-                                {
-                                    echo "<div class='error_profile'><p>Такой логин уже существует!</p></div>";
-                                }
-
-                                $check_email = mysqli_query($link, "SELECT * FROM users WHERE email = '$email'");
-                                if (mysqli_num_rows($check_email) > 0 && $_POST['email'] != $_SESSION['user']['email'])
-                                {
-                                    echo "<div class='error_profile'><p>Такая почта уже существует!</p></div>";
-                                }
-                                
-                                else {
+                                    if (mysqli_num_rows($check_login) > 0 || $_POST['login'] != $_SESSION['user']['login']) {
+                                        echo "<div class='error_profile'><p>Такой логин уже существует!</p></div>";
+                                        return;
+                                    }
+                                    $check_email = mysqli_query($link, "SELECT * FROM users WHERE email = '$email'");
+                                    if (mysqli_num_rows($check_email) > 0 || $_POST['email'] != $_SESSION['user']['email']){
+                                        echo "<div class='error_profile'><p>Такая почта уже существует!</p></div>";
+                                        return;
+                                    }
                                     $sql = "UPDATE users SET full_name='%s', login='%s', email='%s' WHERE id='%d'";
                                     $query = sprintf($sql, mysqli_real_escape_string($link, $_POST['full_name']), mysqli_real_escape_string($link, $_POST['login']), 
                                         mysqli_real_escape_string($link, $_POST['email']), $_SESSION['user']['id']);
                                     $result = mysqli_query($link, $query);
                                     if (!$result){
-                                    die(mysqli_error($link));    
+                                        die(mysqli_error($link));    
                                     }
 
                                     $id = $_SESSION['user']['id'];
@@ -116,10 +112,9 @@ if (!$_SESSION['user']) {
                                             "email" => $user['email']
                                         ];
                                     }
+                                } else {
+                                    echo "<div class='error_profile'><p>Заполните пустые поля!</p></div>";
                                 }
-                            }
-                            else {
-                                echo "<div class='error_profile'><p>Заполните пустые поля!</p></div>";
                             }
                         }
                     ?>
