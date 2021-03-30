@@ -83,14 +83,12 @@ if (!$_SESSION['user']) {
                         if (isset($_POST['profile_sub'])) {
                                 if ($_POST['full_name'] != '' && $_POST['login'] != '' && $_POST['email'] != '') {
                                     $check_login = mysqli_query($link, "SELECT * FROM users WHERE login = '$login'");
-                                    if (mysqli_num_rows($check_login) > 0 || $_POST['login'] != $_SESSION['user']['login']) {
+                                    if (mysqli_num_rows($check_login) > 0 && $_POST['login'] != $_SESSION['user']['login']) {
                                         echo "<div class='error_profile'><p>Такой логин уже существует!</p></div>";
-                                        return;
                                     }
                                     $check_email = mysqli_query($link, "SELECT * FROM users WHERE email = '$email'");
-                                    if (mysqli_num_rows($check_email) > 0 || $_POST['email'] != $_SESSION['user']['email']){
+                                    if (mysqli_num_rows($check_email) > 0 && $_POST['email'] != $_SESSION['user']['email']){
                                         echo "<div class='error_profile'><p>Такая почта уже существует!</p></div>";
-                                        return;
                                     }
                                     $sql = "UPDATE users SET full_name='%s', login='%s', email='%s' WHERE id='%d'";
                                     $query = sprintf($sql, mysqli_real_escape_string($link, $_POST['full_name']), mysqli_real_escape_string($link, $_POST['login']), 
