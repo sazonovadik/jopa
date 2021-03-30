@@ -82,11 +82,13 @@ if (!$_SESSION['user']) {
                     <?php
                         if (isset($_POST['profile_sub'])) {
                                 if ($_POST['full_name'] != '' && $_POST['login'] != '' && $_POST['email'] != '') {
-                                    $check_login = mysqli_query($link, "SELECT * FROM users WHERE login = '$_POST['login']'");
+                                    $login = $_POST['login'];
+                                    $check_login = mysqli_query($link, "SELECT * FROM users WHERE login = '$login'");
                                     if (mysqli_num_rows($check_login) > 0 && $_POST['login'] != $_SESSION['user']['login']) {
                                         echo "<div class='error_profile'><p>Такой логин уже существует!</p></div>";
                                     } else {
-                                        $check_email = mysqli_query($link, "SELECT * FROM users WHERE email = '$_POST['email']'");
+                                        $email = $_POST['email'];
+                                        $check_email = mysqli_query($link, "SELECT * FROM users WHERE email = '$email'");
                                         if (mysqli_num_rows($check_email) > 0 && $_POST['email'] != $_SESSION['user']['email']){
                                             echo "<div class='error_profile'><p>Такая почта уже существует!</p></div>";
                                         } else {
