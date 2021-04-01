@@ -159,6 +159,19 @@ if (!$_SESSION['user']) {
             
             <div class="my_program">
                 <h1>Мои Программы</h1>
+                <?php 
+                $a = false;
+                $b = 0;
+                if (is_bool($a) === true) {
+                    echo("<script>console.log('сработало1');</script>");
+                    echo "<div><p>Да, это булевая переменная!</p></div>";
+                }
+                else if (is_bool($b) === false) {
+                    echo("<script>console.log('сработало2');</script>");
+                    echo "<div><p>Нет, это не булевая переменная!</p></div>";
+                }
+
+                ?>
             </div>
             
             
