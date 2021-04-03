@@ -150,7 +150,20 @@ if (!$_SESSION['user']) {
                     ?>
                 </form>
             </div>
-            
+            <?php
+                $id = $_SESSION['user']['id'];          
+                $query = "SELECT p.* FROM payment p
+                        JOIN good g ON p.id_program = g.id
+                        WHERE p.id = '$id'";
+                $result = mysqli_query($link, $query);
+                if (!$result) {
+                    die(mysqli_error($link));    
+                }
+                while($row = mysqli_fetch_array($result)) {
+                    echo $row; 
+                    echo print_r($row); 
+                }
+            ?>
             <div class="my_program">
                 <h1>Мои Программы</h1>
 
