@@ -1,0 +1,148 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #DEF2F1;
+}
+
+.menu{
+  height: 60px;
+  margin-top: 20px;
+  font-family: 'Russo One', sans-serif;
+  text-decoration:none;
+  font-size:20px;
+}
+
+.container{
+  width: 1060px; 
+  margin: 0 auto;
+}
+
+.price {
+  display:block;
+  font-family: 'Russo One', sans-serif;
+  font-size:30px;
+  color: white;
+  background-color: #1A1A1D;
+  width: 260px;
+  text-align: center;
+}
+
+.podrobnee {
+  display:block;
+  font-family: 'Russo One', sans-serif;
+  font-size:30px;
+  color: white;
+  background-color: red;
+  width: 260px;
+  text-align: center;
+  margin-left: 270px;
+  margin-top: -36px;
+  text-decoration:none;
+}
+
+.podrobnee a {
+  text-decoration:none;
+  color: white;
+}
+
+.menu nav ul {
+    padding:0;
+    margin:0;
+    list-style: none;
+    position: relative;
+}
+
+.menu nav ul li {
+    margin: 0px -7px 0 0;
+    display:inline-block;
+    background-color: #1A1A1D;
+}
+
+.text_glavn {
+  font-family: 'Russo One', sans-serif;
+  width: 700px; 
+  font-size: 30px;
+  float: right;
+  margin-top: -350px;
+}
+
+.menu nav a {
+    font-family: 'Russo One', sans-serif;
+    text-decoration:none;
+    display:block;
+    padding:0 58px;
+    color: white;
+    font-size: 19px;
+    line-height: 60px;
+}
+
+.menu nav ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+}
+
+.menu nav ul li:hover > ul {
+    display:inherit;
+}
+
+.menu nav a:hover {
+    text-decoration:none;
+    color: red;
+}
+
+.menu nav ul ul li {
+    min-width:170px;
+    float:none;
+    display:list-item;
+    position: relative;
+}
+
+.profil a {
+    color: red;
+}
+
+.Proframs_privat {
+   color: red;
+}
+
+.BG {
+  margin-top: 30px;
+}
+
+.bik {
+  margin-top: 50px;
+}
+
+footer {
+  text-align: center;
+}
+
+.stat {
+  margin: 50px 0 30px;
+}
+
+.article {
+  font-family: 'Russo One', sans-serif;
+  font-size: 26px;
+}
+
+.article a {
+  text-decoration:none;
+  color: black;
+  font-size: 32px;
+}
+
+.admin-table {
+  width: 1060px; 
+  margin: 0 auto; 
+}
+
+
+
+
+.form-item {
+  display: block;
+  width: 50%;
+  margin: 10px;
+}
