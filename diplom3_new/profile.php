@@ -151,9 +151,22 @@ if (!$_SESSION['user']) {
                 </form>
             </div>
             
+             <?php
+                $id = $_SESSION['user']['id'];          
+                $query = "SELECT * FROM payment p
+                        JOIN goods g ON p.id_program = g.id
+                        WHERE p.id_user = '$id'";
+                $result = mysqli_query($link, $query);
+                if (!$result) {
+                    die(mysqli_error($link));    
+                }
+                $programs = [];
+                while($row = mysqli_fetch_array($result)) {
+                    array_push($programs, $row);
+                }
+            ?>
             <div class="my_program">
                 <h1>Мои Программы</h1>
-
                 <div class="article">
                 <h3>
                 <a href=""><?=$goods['title']?></a>
@@ -164,9 +177,21 @@ if (!$_SESSION['user']) {
                 </div>
                 <div class="price"><a><?=$goods['price']?> Рублей</a></div>
                 <div class="podrobnee"><a href="good.php?id=<?=$a['id']?>">Подробнее</a></div>
-                
-
                 <a href="/file/<?=$payment['file']?>" download="" title="Программа">Скачать</a>
+                //то что я добавил
+                <?php foreach($programs as $a): ?>
+                    <div class="article">
+                    <h3>
+                    <a href=""><?=$a['title']?></a>
+                    </h3>
+                    <img src="<?=$a['logo']?>">
+                <!-- <em>Опубликовано: <?=$a['date']?></em> -->
+                <!-- <p><?=goods_intro($a['content'])?></p> -->
+                    </div>
+                    <div class="price"><a><?=$a['price']?> Рублей</a></div>
+                    <div class="podrobnee"><a href="good.php?id=<?=$a['id']?>">Подробнее</a></div>
+                
+                <?php endforeach ?>
             </div>
             
             
