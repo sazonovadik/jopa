@@ -14,13 +14,27 @@ if (isset($_POST['profile_sub'])) {
     if (!$result){
     die(mysqli_error($link));    
     }
+
+    $id = $_SESSION['user']['id'];
+    $check_user = mysqli_query($link, "SELECT * FROM `users` WHERE `id` = '$id'");
+    if (mysqli_num_rows($check_user) > 0) {
+        $user = mysqli_fetch_assoc($check_user);
+        $_SESSION['user'] = [
+            "id" => $user['id'],
+            "full_name" => $user['full_name'],
+            "avatar" => $user['avatar'],
+            "login" => $user['login'],
+            "email" => $user['email']
+        ];
+    }
 }
 
-if (isset($_POST['profile_sub2'])) {
-    if ((isset($_POST['password']))==(isset($_POST['password_confirm']))) {
-         $sql = "UPDATE users SET = password'%s' WHERE id='%d'";
-    $query = sprintf($sql, mysqli_real_escape_string($link, $_POST['password']), $_SESSION['user']['id']);
-    $result = mysqli_query($link, $query);
+if (isset($_POST['password_sub'])) {
+    if ($_POST['password']===$_POST['password_confirm']) {
+        $sql = "UPDATE users SET password='%s' WHERE id='%d'";
+        $pass = md5($_POST['password']);
+        $query = sprintf($sql, mysqli_real_escape_string($link, $pass), $_SESSION['user']['id']);
+        $result = mysqli_query($link, $query);
         if (!$result) {
             die(mysqli_error($link));    
         }
@@ -99,7 +113,7 @@ if (isset($_POST['profile_sub2'])) {
                     <input type="password" name="password" placeholder="Введите пароль"><br>
                     <label>Подтверждение пароля:</label>
                     <input type="password" name="password_confirm" placeholder="Подтвердите пароль">
-                    <button type="submit" name="password_sub2">Сохранить</button>
+                    <button type="submit" name="password_sub">Сохранить</button>
                 </form>
             </div>
             
